@@ -1,0 +1,67 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+# Use the official Next.js plugin for SSR
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "18"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# ─────────────── API Proxy ───────────────
+[[redirects]]
+  from = "/api/*"
+  to = "https://api.superflow.run/:splat"
+  status = 200
+  force = true
+
+# ─────────────── Blog Proxy ───────────────
+[[redirects]]
+  from = "/blogs"
+  to = "https://blogs.subspace.money/blogs"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blogs/*"
+  to = "https://blogs.subspace.money/blogs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/blog/*"
+  to = "https://blogs.subspace.money/blog/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/about-us"
+  to = "https://blogs.subspace.money/about-us"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "https://blogs.subspace.money/contact"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/docs/*"
+  to = "https://blogs.subspace.money/docs/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/assets/*"
+  to = "https://blogs.subspace.money/assets/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/static/*"
+  to = "https://blogs.subspace.money/static/:splat"
+  status = 200
+  force = true
