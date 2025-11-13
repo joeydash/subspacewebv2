@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Camera, Save } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth-store';
 
@@ -156,11 +157,13 @@ const EditGroupDetails: React.FC<EditGroupDetailsProps> = ({
       <div className="text-center">
         <div className="text-lg font-medium text-white mb-4">Change Profile Image</div>
         <div className="relative inline-block">
-          <div className="w-32 h-32 rounded-2xl overflow-hidden bg-dark-400 mx-auto mb-4">
-            <img
+          <div className="w-32 h-32 rounded-2xl overflow-hidden bg-dark-400 mx-auto mb-4 relative">
+            <Image
               src={editGroupImage}
               alt="Group"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              sizes="128px"
             />
           </div>
           <label className="absolute bottom-2 right-2 w-10 h-10 bg-dark-600 hover:bg-dark-500 rounded-lg flex items-center justify-center cursor-pointer transition-colors border border-gray-600">

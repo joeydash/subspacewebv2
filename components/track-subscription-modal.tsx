@@ -47,6 +47,8 @@ const TrackSubscriptionModal: React.FC<TrackSubscriptionModalProps> = ({
 
 	// Prevent background scroll when modal is open
 	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
 		document.body.style.overflow = 'hidden';
 		return () => {
 			document.body.style.overflow = 'unset';
@@ -55,6 +57,8 @@ const TrackSubscriptionModal: React.FC<TrackSubscriptionModalProps> = ({
 
 	// Close date picker when clicking outside
 	useEffect(() => {
+		if (typeof window === 'undefined') return;
+
 		const handleClickOutside = (event: MouseEvent) => {
 			if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
 				setShowDatePicker(false);

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, FileText, Info, Star, LogOut, Crown, ArrowLeft, ChevronRight, CreditCard as Edit, MessageSquare, Calendar, Mail, FileImage, Trash2, CreditCard, UserPlus, Link, EllipsisVertical } from 'lucide-react';
+import { X, FileText, Info, Star, LogOut, Crown, ArrowLeft, ChevronRight, CreditCard as Edit, MessageSquare, Mail, FileImage, Trash2, CreditCard, UserPlus, Link, EllipsisVertical } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth-store';
 import CallModal from './call-modal';
 import AdminRatingModal from './admin-rating-modal';
@@ -98,7 +98,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 	const [showCallModal, setShowCallModal] = useState(false);
 	const [selectedMemberForRating, setSelectedMemberForRating] = useState<GroupMember | null>(null);
 	const [selectedMemberForInfo, setSelectedMemberForInfo] = useState<GroupMember | null>(null);
-	const [isLeavingGroup, setIsLeavingGroup] = useState(false);
+	// const [isLeavingGroup, setIsLeavingGroup] = useState(false);
 	const [showInfoModal, setShowInfoModal] = useState(false);
 	const [showRatingModal, setShowRatingModal] = useState(false);
 	const [showLeaveModal, setShowLeaveModal] = useState(false);
@@ -123,17 +123,20 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 		}
 	}, [isOpen, groupId, user?.auth_token]);
 
-	// Prevent background scroll when modal is open
+	// Prevent background scroll when modal is open (client only)
 	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = 'unset';
+		if (typeof window === 'undefined') {
+			return;
 		}
 
-		// Cleanup on unmount
+		if (isOpen) {
+			window.document.body.style.overflow = 'hidden';
+		} else {
+			window.document.body.style.overflow = 'unset';
+		}
+
 		return () => {
-			document.body.style.overflow = 'unset';
+			window.document.body.style.overflow = 'unset';
 		};
 	}, [isOpen]);
 	// Reset transactions state when modal opens

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowLeft, Search, Star, Clock, Play, Package, TrendingUp, UserPlus, Crown, Award } from 'lucide-react';
@@ -28,7 +28,7 @@ interface SubscriptionProduct {
 }
 
 
-const SearchResultsPage = () => {
+const SearchResultsPageContent = () => {
 	const { user, isAuthenticated } = useAuthStore();
 	const { t } = useLanguageStore();
 	const router = useRouter();
@@ -513,6 +513,20 @@ const SearchResultsPage = () => {
 				/>
 			)}
 		</div>
+	);
+};
+
+const SearchResultsPage = () => {
+	return (
+		<Suspense fallback={
+			<div className="page-container pt-24">
+				<div className="flex justify-center items-center h-64">
+					<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+				</div>
+			</div>
+		}>
+			<SearchResultsPageContent />
+		</Suspense>
 	);
 };
 

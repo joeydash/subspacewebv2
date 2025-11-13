@@ -272,7 +272,7 @@ const RentalCheckoutPage = () => {
 	return (
 		<div className="page-container pt-20 pb-8 px-4 md:px-6">
 			<div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-8">
-				<button onClick={() => router.back()} className="text-gray-400 hover:text-white transition-colors p-1.5 md:p-2 hover:bg-dark-400 rounded-lg flex-shrink-0">
+				<button onClick={() => router.back()} className="text-gray-400 hover:text-white transition-colors p-1.5 md:p-2 hover:bg-dark-400 rounded-lg shrink-0">
 					<ArrowLeft className="h-5 w-5 md:h-6 md:w-6" />
 				</button>
 				<div className="flex-1 min-w-0">
@@ -290,7 +290,7 @@ const RentalCheckoutPage = () => {
 								Product Details
 							</h2>
 							<div className="flex items-start gap-3 md:gap-4">
-								<div className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-white p-2 flex-shrink-0 shadow-lg relative">
+								<div className="w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden bg-white p-2 shrink-0 shadow-lg relative">
 									{productDetails.product_photos && productDetails.product_photos.length > 0 ? (
 										<Image
 											src={productDetails.product_photos[0]}
@@ -336,7 +336,7 @@ const RentalCheckoutPage = () => {
 								isValidRentalPeriod() ? (
 									<div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mt-4">
 										<div className="flex items-start gap-2 text-blue-400 text-sm">
-											<Clock className="h-4 w-4 flex-shrink-0 mt-0.5" />
+											<Clock className="h-4 w-4 shrink-0 mt-0.5" />
 											<div className="flex-1">
 												<p className="font-medium">Rental Duration Confirmed</p>
 												<p className="text-gray-300 text-xs mt-1">
@@ -348,7 +348,7 @@ const RentalCheckoutPage = () => {
 								) : (
 									<div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 mt-4">
 										<div className="flex items-start gap-2 text-red-400 text-sm">
-											<AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
+											<AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
 											<p>Rental period must be at least 1 day (24 hours)</p>
 										</div>
 									</div>
@@ -507,7 +507,7 @@ const RentalCheckoutPage = () => {
 								{error && (
 									<div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 mb-4">
 										<div className="flex items-start gap-2 text-red-400 text-xs md:text-sm">
-											<AlertCircle className="h-4 w-4 flex-shrink-0 mt-0.5" />
+											<AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
 											<span>{error}</span>
 										</div>
 									</div>
@@ -576,4 +576,4 @@ const ProtectedRentalCheckoutPage = () => {
 	)
 }
 
-export default RentalCheckoutPage;
+export default ProtectedRentalCheckoutPage;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { ArrowRight, CircleAlert as AlertCircle, CircleCheck as CheckCircle } from 'lucide-react';
@@ -14,7 +14,7 @@ enum AuthStep {
 	VERIFIED,
 }
 
-const AuthPage = () => {
+const AuthPageContent = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const { t } = useLanguageStore();
@@ -133,7 +133,7 @@ const AuthPage = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-dark-600 via-dark-700 to-dark-800 flex items-center justify-center p-4 relative overflow-hidden">
+		<div className="min-h-screen bg-linear-to-br from-dark-600 via-dark-700 to-dark-800 flex items-center justify-center p-4 relative overflow-hidden">
 			{/* Animated Background Elements */}
 			<div className="absolute inset-0 overflow-hidden">
 				{/* Floating Orbs */}
@@ -143,8 +143,8 @@ const AuthPage = () => {
 				<div className="absolute bottom-20 right-10 w-28 h-28 bg-pink-500/15 rounded-full blur-xl animate-pulse delay-700"></div>
 
 				{/* Floating Lines */}
-				<div className="absolute top-1/4 left-1/2 w-px h-20 bg-gradient-to-b from-transparent via-indigo-400/30 to-transparent animate-pulse delay-200"></div>
-				<div className="absolute bottom-1/4 right-1/4 w-16 h-px bg-gradient-to-r from-transparent via-purple-400/30 to-transparent animate-pulse delay-800"></div>
+				<div className="absolute top-1/4 left-1/2 w-px h-20 bg-linear-to-b from-transparent via-indigo-400/30 to-transparent animate-pulse delay-200"></div>
+				<div className="absolute bottom-1/4 right-1/4 w-16 h-px bg-linear-to-r from-transparent via-purple-400/30 to-transparent animate-pulse delay-800"></div>
 			</div>
 
 			<div className="w-full max-w-md">
@@ -156,7 +156,7 @@ const AuthPage = () => {
 						</div>
 					</div>
 					{/*
-		<h1 className="text-4xl font-bold bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent animate-slide-up">
+		<h1 className="text-4xl font-bold bg-linear-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent animate-slide-up">
 		  {t('auth.title')}
 		</h1>
 		*/}
@@ -176,7 +176,7 @@ const AuthPage = () => {
 										{t('auth.phone.label')}
 									</label>
 									<div className="relative group">
-										<div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+										<div className="absolute inset-0 bg-linear-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 										<input
 											type="tel"
 											id="phone"
@@ -213,14 +213,14 @@ const AuthPage = () => {
 
 								{error && (
 									<div className="mb-6 p-3 sm:p-4 bg-red-500/10 border border-red-500/20 text-red-300 rounded-xl flex items-center backdrop-blur-sm animate-fade-in">
-										<AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-red-400 flex-shrink-0" />
+										<AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-red-400 shrink-0" />
 										<span className="text-sm sm:text-base">{error}</span>
 									</div>
 								)}
 
 								<button
 									type="submit"
-									className="w-full py-3 sm:py-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/25 disabled:transform-none disabled:shadow-none flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
+									className="w-full py-3 sm:py-4 bg-linear-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/25 disabled:transform-none disabled:shadow-none flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
 									disabled={isLoading || !isOnline}
 								>
 									{isLoading ? (
@@ -300,14 +300,14 @@ const AuthPage = () => {
 
 								{error && (
 									<div className="mb-6 p-3 sm:p-4 bg-red-500/10 border border-red-500/20 text-red-300 rounded-xl flex items-center backdrop-blur-sm animate-fade-in">
-										<AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-red-400 flex-shrink-0" />
+										<AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-red-400 shrink-0" />
 										<span className="text-sm sm:text-base">{error}</span>
 									</div>
 								)}
 
 								<button
 									type="submit"
-									className="w-full py-3 sm:py-4 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/25 disabled:transform-none disabled:shadow-none flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
+									className="w-full py-3 sm:py-4 bg-linear-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/25 disabled:transform-none disabled:shadow-none flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
 									disabled={isLoading || !isOnline}
 								>
 									{isLoading ? (
@@ -348,7 +348,7 @@ const AuthPage = () => {
 								<p className="text-gray-300 mb-8 text-lg">{t('auth.success.subtitle')}</p>
 								<button
 									onClick={() => router.push(redirectPath)}
-									className="w-full py-3 sm:py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/25 flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
+									className="w-full py-3 sm:py-4 bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg hover:shadow-green-500/25 flex items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg"
 								>
 									<CheckCircle className="h-5 w-5" />
 									{t('common.continue')}
@@ -363,4 +363,14 @@ const AuthPage = () => {
 
 };
 
-export default AuthPage;
+export default function AuthPage() {
+	return (
+		<Suspense fallback={
+			<div className="min-h-screen bg-linear-to-br from-dark-600 via-dark-700 to-dark-800 flex items-center justify-center">
+				<div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+			</div>
+		}>
+			<AuthPageContent />
+		</Suspense>
+	);
+}

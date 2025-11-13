@@ -35,7 +35,7 @@ const PublicGroupsPage = () => {
 	// const [showFilters, setShowFilters] = useState(false);
 	const [showInfoModal, setShowInfoModal] = useState(false);
 
-	const { data: groups = [], isLoading } = usePublicGroups({ userId: user?.id, authToken: user?.auth_token });
+	const { data: groups = [], isLoading } = usePublicGroups({ userId: user?.id || '', authToken: user?.auth_token || '' });
 
 
 	let filteredGroups = [...groups];
@@ -79,7 +79,7 @@ const PublicGroupsPage = () => {
 				{/* Header */}
 				<div className="mb-6 space-y-4">
 					<div className="flex items-center gap-3">
-						<Link to="/" className="text-gray-400 hover:text-white transition-colors">
+						<Link href="/" className="text-gray-400 hover:text-white transition-colors">
 							<ArrowLeft className="h-6 w-6" />
 						</Link>
 						<h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold">Public Groups</h1>

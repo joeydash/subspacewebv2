@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { X, Star, Send, AlertCircle, CheckCircle } from 'lucide-react';
 import {useAuthStore} from '@/lib/store/auth-store';
 import {useLanguageStore} from '@/lib/store/language-store';
@@ -250,12 +251,14 @@ const AdminRatingModal: React.FC<AdminRatingModalProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
-                <div className="w-full h-full rounded-full overflow-hidden bg-dark-600">
+                <div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
                   {adminImage ? (
-                    <img
+                    <Image
                       src={adminImage}
                       alt={adminName}
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="48px"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center">

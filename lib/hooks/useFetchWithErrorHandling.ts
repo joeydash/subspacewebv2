@@ -67,7 +67,7 @@ export function useFetchWithErrorHandling<T = any>() {
         
         if (authError) {
           logout();
-          navigate('/auth', { replace: true });
+        //   navigate('/auth', { replace: true });
           throw new Error('Authentication failed. Please log in again.');
         }
         
@@ -92,7 +92,7 @@ export function useFetchWithErrorHandling<T = any>() {
       // Handle auth errors
       if (apiError.type === 'auth') {
         logout();
-        navigate('/auth', { replace: true });
+        // navigate('/auth', { replace: true });
         return null;
       }
       
@@ -103,7 +103,8 @@ export function useFetchWithErrorHandling<T = any>() {
       
       return null;
     }
-  }, [navigate, user, logout]);
+  }, [user, logout]);
+// }, [navigate, user, logout]);
 
   const graphqlFetch = useCallback(async (
     url: string,

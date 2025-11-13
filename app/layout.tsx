@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "./preloader.css";
 import { Providers } from "./providers";
 import GraphQLErrorHandler from "@/components/graphql-error-handler";
+import Loader from "@/components/loader";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -29,6 +31,7 @@ export default function RootLayout({
 			<body
 				className={`${inter.variable} font-sans antialiased`}
 			>
+				<Loader />				
 				<Providers>
 					<GraphQLErrorHandler />
 					{children}

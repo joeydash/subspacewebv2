@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { Suspense, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -12,7 +12,7 @@ import { BrandsPageSkeleton } from '@/skeletons/brands-skeleton';
 import { useRentProductBrands } from '@/lib/hooks/rent/use-rent-product-brands';
 import { useCurrentLocation } from '@/lib/context/location-context';
 
-const RentalBrandsPage = () => {
+const RentalBrandsPageContent = () => {
 	const { user } = useAuthStore();
 	const { t } = useLanguageStore();
 	const [searchQuery, setSearchQuery] = useState('');
@@ -170,6 +170,14 @@ const RentalBrandsPage = () => {
 				)}
 			</div>
 		</div>
+	);
+};
+
+const RentalBrandsPage = () => {
+	return (
+		<Suspense fallback={<BrandsPageSkeleton showCategories={true} categoriesCount={8} brandsCount={12} />}>
+			<RentalBrandsPageContent />
+		</Suspense>
 	);
 };
 

@@ -83,35 +83,35 @@ const GroupInfoView: React.FC<GroupInfoViewProps> = ({
 
       <div className="space-y-4 text-gray-300 text-sm leading-relaxed">
         <div className="flex items-start gap-3">
-          <span className="text-indigo-400 font-bold text-lg flex-shrink-0">1.</span>
+          <span className="text-indigo-400 font-bold text-lg shrink-0">1.</span>
           <p>
             Please do not pay the admin directly outside of Subspace using Gpay, Paytm, Phonepe, or any other payment platform. In the event that the admin engages in fraudulent activity, we may be unable to assist you.
           </p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="text-indigo-400 font-bold text-lg flex-shrink-0">2.</span>
+          <span className="text-indigo-400 font-bold text-lg shrink-0">2.</span>
           <p>
             If for any reason you do not receive your credentials within 12 hours, you are entitled to a full refund.
           </p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="text-indigo-400 font-bold text-lg flex-shrink-0">3.</span>
+          <span className="text-indigo-400 font-bold text-lg shrink-0">3.</span>
           <p>
             You may request to leave the group at any time, provided that the admin has not revoked your access or credentials.
           </p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="text-indigo-400 font-bold text-lg flex-shrink-0">4.</span>
+          <span className="text-indigo-400 font-bold text-lg shrink-0">4.</span>
           <p>
             Please do not share your personal contact details with the admin, as this may result in unwanted spamming or fraud.
           </p>
         </div>
 
         <div className="flex items-start gap-3">
-          <span className="text-indigo-400 font-bold text-lg flex-shrink-0">5.</span>
+          <span className="text-indigo-400 font-bold text-lg shrink-0">5.</span>
           <p>
             You will receive your credentials within 12 hours of joining the group.
           </p>

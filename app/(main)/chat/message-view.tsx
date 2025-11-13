@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import Image from 'next/image';
 import { MoreVertical, Trash2, Loader, SendHorizontal, Circle, Smile, MessageSquare, ExternalLink } from 'lucide-react';
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import MakeGroupPublicPrompt from './make-group-public-prompt';
@@ -145,16 +146,20 @@ const MessageView: React.FC<MessageViewProps> = ({
 		}
 	}, [selectedChat?.id]);
 
-	// Close emoji picker when clicking outside
+	// Close emoji picker when clicking outside (client only)
 	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
 		const handleClickOutside = (event: MouseEvent) => {
 			if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
 				setShowEmojiPicker(false);
 			}
 		};
 
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
+		window.document.addEventListener('mousedown', handleClickOutside);
+		return () => window.document.removeEventListener('mousedown', handleClickOutside);
 	}, []);
 
 	// Replace the scroll-to-unread effect with this version that only scrolls the container:
@@ -516,11 +521,13 @@ const MessageView: React.FC<MessageViewProps> = ({
 						{/* Avatar with enhanced design */}
 						<div className="relative flex-shrink-0">
 							<div className="w-9 h-9 md:w-10 md:h-10 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-0.5 shadow-md ring-1 ring-dark-600/50 group-hover:ring-indigo-500/30 transition-all duration-300">
-								<div className="w-full h-full rounded-full overflow-hidden bg-dark-600">
-									<img
+								<div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
+									<Image
 										src={selectedChat.type === 'group' ? selectedChat.room_dp : selectedChat.whatsub_room_user_mappings[0]?.auth_fullname?.dp}
 										alt=""
-										className="w-full h-full object-cover"
+										fill
+										className="object-cover"
+										sizes="40px"
 									/>
 								</div>
 							</div>
@@ -666,15 +673,17 @@ const MessageView: React.FC<MessageViewProps> = ({
 												{/* Avatar */}
 												{!isCurrentUser && selectedChat.type === 'group' && (
 													<div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5 flex-shrink-0 mr-2">
-														<div className="w-full h-full rounded-full overflow-hidden bg-dark-600">
-															<img
+														<div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
+															<Image
 																src={
 																	selectedChat.type === 'group'
 																		? selectedChat.room_dp
 																		: selectedChat.whatsub_room_user_mappings[0]?.auth_fullname?.dp
 																}
 																alt=""
-																className="w-full h-full object-cover"
+																fill
+																className="object-cover"
+																sizes="32px"
 															/>
 														</div>
 													</div>
@@ -709,13 +718,15 @@ const MessageView: React.FC<MessageViewProps> = ({
 														)}
 
 														{type === 'image' && (
-															<div className="max-w-xs">
-																<img
+															<div className="max-w-xs relative" style={{ maxWidth: '300px', maxHeight: '300px' }}>
+																<Image
 																	src={message.message}
 																	alt="Shared image"
+																	width={300}
+																	height={300}
 																	className="w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
 																	style={{ maxWidth: '300px', maxHeight: '300px', objectFit: 'contain' }}
-																	onClick={() => window.open(message.message, '_blank')}
+																	onClick={() => window?.open(message.message, '_blank')}
 																	onError={(e) => {
 																		e.currentTarget.style.display = 'none';
 																		e.currentTarget.nextElementSibling?.classList.remove('hidden');
@@ -745,7 +756,7 @@ const MessageView: React.FC<MessageViewProps> = ({
 																	].includes(message.click_type) &&
 																	message.click_data?.url && (
 																		<button
-																			onClick={() => window.open(message.click_data.url, '_blank')}
+																			onClick={() => window?.open(message.click_data.url, '_blank')}
 																			className="w-full flex items-center justify-center gap-2 bg-dark-500/60 hover:bg-dark-500 text-indigo-400 hover:text-indigo-300 font-medium text-sm py-2 rounded-xl border border-dark-300/40 transition-all"
 																		>
 																			<ExternalLink className="w-4 h-4" />

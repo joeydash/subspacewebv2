@@ -645,7 +645,7 @@ const SupportChatPage = () => {
 						<div
 							className="relative cursor-pointer"
 						>
-							<div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+							<div className="w-12 h-12 rounded-full overflow-hidden bg-linear-to-br from-indigo-500 to-purple-500 p-0.5">
 								<div className="w-full h-full rounded-full overflow-hidden bg-dark-600">
 									<Image
 										src={supportRoomDetails?.whatsub_room_user_mappings?.[0]?.auth_fullname?.dp || '/placeholder.png'}
@@ -779,7 +779,7 @@ const SupportChatPage = () => {
 									<div className={`flex mb-4 ${isCurrentUser ? 'justify-end' : 'justify-start'}`}>
 										<div className={`flex items-end max-w-xs lg:max-w-md ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
 											{!isCurrentUser && (
-												<div className="w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5 shrink-0 mr-2">
+												<div className="w-8 h-8 rounded-full overflow-hidden bg-linear-to-br from-indigo-500 to-purple-500 p-0.5 shrink-0 mr-2">
 													<div className="w-full h-full rounded-full overflow-hidden bg-dark-600">
 														<Image
 															src={supportRoomDetails?.whatsub_room_user_mappings?.[0]?.auth_fullname?.dp || '/placeholder.png'}

@@ -299,13 +299,13 @@ const ChatList: React.FC<ChatListProps> = ({
 		switch (type) {
 			case 'group':
 			case 'pool':
-				return <div className="w-2 h-2 bg-blue-400 border-1 border-white rounded-full"></div>;
+				return <div className="w-2 h-2 bg-blue-400 border border-white rounded-full"></div>;
 			case 'private':
-				return <div className="w-2 h-2 bg-green-400 rounded-full border-1 border-white "></div>;
+				return <div className="w-2 h-2 bg-green-400 rounded-full border border-white "></div>;
 			case 'anonymous':
 				return <div className="w-2 h-2 bg-purple-400 rounded-full border-6 border-white "></div>;
 			default:
-				return <div className="w-2 h-2 bg-gray-400 rounded-full border-1 border-white "></div>;
+				return <div className="w-2 h-2 bg-gray-400 rounded-full border border-white "></div>;
 		}
 	};
 
@@ -322,7 +322,7 @@ const ChatList: React.FC<ChatListProps> = ({
 							placeholder={t('chat.searchConversations') || 'Search conversations...'}
 							value={searchQuery}
 							onChange={handleSearchChange}
-							className="w-full bg-dark-400 text-white rounded-2xl px-4 py-[10px] pl-10 focus:outline-none focus:ring-1 focus:ring-indigo-00"
+							className="w-full bg-dark-400 text-white rounded-2xl px-4 py-2.5 pl-10 focus:outline-none focus:ring-1 focus:ring-indigo-00"
 						/>
 						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
 
@@ -347,7 +347,7 @@ const ChatList: React.FC<ChatListProps> = ({
 													onClick={() => handleSelectSearchResult(result)}
 												>
 													<div className="relative">
-														<div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+														<div className="w-10 h-10 rounded-full overflow-hidden bg-linear-to-br from-indigo-500 to-purple-500 p-0.5">
 															<div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
 																{displayImage ? (
 																	<Image
@@ -385,7 +385,7 @@ const ChatList: React.FC<ChatListProps> = ({
 					{/* Plus Button */}
 					<Link
 						href="/friends"
-						className="w-10 h-10 bg-indigo-500 hover:bg-indigo-600 rounded-[50%] flex items-center justify-center transition-colors flex-shrink-0"
+						className="w-10 h-10 bg-indigo-500 hover:bg-indigo-600 rounded-[50%] flex items-center justify-center transition-colors shrink-0"
 					>
 						<Plus className="h-5 w-5 text-white" />
 					</Link>
@@ -400,7 +400,7 @@ const ChatList: React.FC<ChatListProps> = ({
 									<button
 										key={tab}
 										onClick={() => onTabChange(tab)}
-										className={`relative flex-shrink-0 px-4 py-2 rounded-3xl text-sm font-semibold transition-all duration-300 whitespace-nowrap overflow-hidden ${
+										className={`relative shrink-0 px-4 py-2 rounded-3xl text-sm font-semibold transition-all duration-300 whitespace-nowrap overflow-hidden ${
 											activeTab === tab
 												? 'bg-indigo-500 text-white'
 												: 'text-gray-400 hover:text-white hover:bg-dark-300/50'
@@ -462,7 +462,7 @@ const ChatList: React.FC<ChatListProps> = ({
 									>
 										<div className="flex items-start space-x-3">
 											<div className="relative">
-												<div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+												<div className="w-12 h-12 rounded-full overflow-hidden bg-linear-to-br from-indigo-500 to-purple-500 p-0.5">
 													<div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
 														{dp ? (
 															<Image
@@ -486,7 +486,7 @@ const ChatList: React.FC<ChatListProps> = ({
 													<h3 className={`font-semibold truncate ${isSelected ? 'text-white' : 'text-gray-200'}`}>
 														{name}
 													</h3>
-													<div className="flex items-center gap-2 flex-shrink-0 ml-2">
+													<div className="flex items-center gap-2 shrink-0 ml-2">
 														<span className="text-xs text-gray-400">
 															{getLastMessageTime(chat.latest_message_created_at)}
 														</span>

@@ -266,7 +266,7 @@ const CartPage = () => {
 								<div key={item.id} className={`relative py-4 ${index !== cartData.items.length - 1 ? 'border-b border-gray-700' : ''}`}>
 									<div className="flex gap-3 md:gap-4">
 										{/* Product Image */}
-										<div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 bg-dark-600 rounded-lg overflow-hidden relative">
+										<div className="w-20 h-20 md:w-24 md:h-24 shrink-0 bg-dark-600 rounded-lg overflow-hidden relative">
 											<Image
 												src={item.image_url}
 												alt={item.service_name}
@@ -286,7 +286,7 @@ const CartPage = () => {
 												</div>
 
 												{/* Price on the right */}
-												<div className="text-right flex-shrink-0">
+												<div className="text-right shrink-0">
 													<div className="text-lg md:text-xl font-bold text-white">
 														₹{item.discounted_price.toFixed(2)}
 													</div>
@@ -332,7 +332,7 @@ const CartPage = () => {
 					</div>
 
 					{/* Order Summary */}
-					<div className="lg:w-96 flex-shrink-0">
+					<div className="lg:w-96 shrink-0">
 						<div className="bg-dark-500 rounded-lg p-4 md:p-6">
 							<h2 className="text-lg md:text-xl font-bold mb-4 md:mb-6">{t('cart.orderSummary')}</h2>
 
