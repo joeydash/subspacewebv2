@@ -17,9 +17,11 @@
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
     "@tanstack/react-query": "^5.90.7",
+    "@tanstack/react-query-devtools": "^5.90.2",
     "@vis.gl/react-google-maps": "^1.7.1",
     "axios": "^1.13.2",
     "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "emoji-picker-react": "^4.15.0",
     "framer-motion": "^12.23.24",
@@ -33,7 +35,8 @@
     "react-loading-skeleton": "^3.5.0",
     "react-markdown": "^10.1.0",
     "socket.io-client": "^4.8.1",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "vocallabs_agent_web": "^1.0.1"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.14.5",

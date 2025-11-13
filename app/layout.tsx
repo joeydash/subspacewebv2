@@ -5,6 +5,7 @@ import "./preloader.css";
 import { Providers } from "./providers";
 import GraphQLErrorHandler from "@/components/graphql-error-handler";
 import Loader from "@/components/loader";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -36,6 +37,7 @@ export default function RootLayout({
 					<GraphQLErrorHandler />
 					{children}
 				</Providers>
+				<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 			</body>
 		</html>
 	);

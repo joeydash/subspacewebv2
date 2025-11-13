@@ -337,7 +337,8 @@ This project is proprietary software. All rights reserved.
 
 ## 👥 Team
 
-- **Developer:** [joeydash](https://github.com/joeydash)
+- **Owner:** [joeydash](https://github.com/joeydash)
+- **Developer:** [Prabhas K](https://github.com/Kola-Prabhas)
 
 ---
 
