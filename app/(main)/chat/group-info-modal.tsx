@@ -10,7 +10,7 @@ import FriendInfoModal from '@/components/friend-info-modal';
 import LeaveGroupModal from './leave-group-modal';
 import EditGroupDetails from './edit-group-details';
 import WelcomeMessage from './welcome-message';
-import ChatMailBox from './chat-mail-box';
+// import ChatMailBox from './chat-mail-box';
 import UploadTermsComponent from './upload-terms-component';
 import GroupInfoView from './group-info-view';
 import DeleteGroupConfirmationModal from './delete-group-confirmation-modal';
@@ -89,6 +89,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 	const [groupInfo, setGroupInfo] = useState<GroupInfo | null>(null);
 	const [groupMembers, setGroupMembers] = useState<GroupMember[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isMounted, setIsMounted] = useState(false);
 	const [isLoadingTransactions, setIsLoadingTransactions] = useState(false);
 	const [isLoadingMoreTransactions, setIsLoadingMoreTransactions] = useState(false);
 	const [transactionOffset, setTransactionOffset] = useState(0);
@@ -114,8 +115,18 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 	const [showDeleteRestrictionModal, setShowDeleteRestrictionModal] = useState(false);
 	const [showLeaveRestrictionModal, setShowLeaveRestrictionModal] = useState(false);
 	const [hoursRemainingToLeave, setHoursRemainingToLeave] = useState(0);
+	const [isOnline, setIsOnline] = useState(true);
 
 	const TRANSACTIONS_LIMIT = 20;
+
+	// Client-side mounting check
+	useEffect(() => {
+		setIsMounted(true);
+		// Set initial online status only on client
+		if (typeof navigator !== 'undefined') {
+			setIsOnline(navigator.onLine);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (isOpen && groupId && user?.auth_token) {
@@ -139,6 +150,24 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 			window.document.body.style.overflow = 'unset';
 		};
 	}, [isOpen]);
+
+	// Handle online/offline events (client only)
+	useEffect(() => {
+		if (typeof window === 'undefined') {
+			return;
+		}
+
+		const handleOnline = () => setIsOnline(true);
+		const handleOffline = () => setIsOnline(false);
+
+		window.addEventListener('online', handleOnline);
+		window.addEventListener('offline', handleOffline);
+
+		return () => {
+			window.removeEventListener('online', handleOnline);
+			window.removeEventListener('offline', handleOffline);
+		};
+	}, []);
 	// Reset transactions state when modal opens
 	useEffect(() => {
 		if (isOpen) {
@@ -762,19 +791,8 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 															</div>
 															<ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
 														</button>
-														{/*
-														<button
-															className="w-full flex items-center justify-between p-3 sm:p-3.5 bg-dark-400 hover:bg-dark-300 rounded-lg transition-colors group"
-														>
-															<div className="flex items-center gap-2 sm:gap-3">
-																<Calendar className="h-5 w-5 text-yellow-400" />
-																<span className="text-sm sm:text-base font-medium">Expiry</span>
-															</div>
-															<ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
-														</button>
-                            */}
 
-														<button
+														{/* <button
 															onClick={() => setActiveView('mailbox')}
 															className="w-full flex items-center justify-between p-3 sm:p-3.5 bg-dark-400 hover:bg-dark-300 rounded-lg transition-colors group"
 														>
@@ -783,7 +801,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 																<span className="text-sm sm:text-base font-medium">Mail Box</span>
 															</div>
 															<ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
-														</button>
+														</button> */}
 														<button
 															onClick={() => setActiveView('make-public')}
 															className="w-full flex items-center justify-between p-3 sm:p-3.5 bg-dark-400 hover:bg-dark-300 rounded-lg transition-colors group"
@@ -917,7 +935,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 										</div>
 									)}
 
-									{/* Edit Details View */}
 									{activeView === 'edit-details' && groupInfo && (
 										<EditGroupDetails
 											groupId={groupId}
@@ -928,7 +945,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 										/>
 									)}
 
-									{/* Welcome Message View */}
 									{activeView === 'welcome-message' && (
 										<WelcomeMessage
 											groupId={groupId}
@@ -937,12 +953,12 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 										/>
 									)}
 
-									{/* Mailbox View */}
 									{activeView === 'mailbox' && (
-										<ChatMailBox
-											onBack={() => setActiveView('main')}
-											roomDetails={roomDetails}
-										/>
+										<div className="space-y-4">Mailbox View</div>
+										// <ChatMailBox
+										// 	onBack={() => setActiveView('main')}
+										// 	roomDetails={roomDetails}
+										// />
 									)}
 
 									{/* Make Public View */}
@@ -950,14 +966,11 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 										<UploadTermsComponent
 											groupId={groupId}
 											onMakePublic={() => {
-												console.log('Make public clicked');
-												// Handle make public logic here
 												setActiveView('main');
 											}}
 										/>
 									)}
 
-									{/* Info View */}
 									{activeView === 'info' && groupInfo && (
 										<GroupInfoView
 											currentUserMapping={currentUserMapping}
@@ -1341,7 +1354,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				</div>
 			</div>
 
-			{/* Call Modal */}
 			{selectedMemberForInfo && (
 				<CallModal
 					isOpen={showCallModal}
@@ -1355,7 +1367,9 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				/>
 			)}
 
-			{/* Admin Rating Modal */}
+
+
+
 			{showRatingModal && selectedMemberForRating && (
 				<AdminRatingModal
 					isOpen={showRatingModal}
@@ -1372,6 +1386,8 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				/>
 			)}
 
+
+
 			{selectedMemberForInfo != null && (
 				<FriendInfoModal
 					friendId={selectedMemberForInfo.user_id}
@@ -1382,7 +1398,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				/>
 			)}
 
-			{/* Leave Group Modal */}
 			<LeaveGroupModal
 				isOpen={showLeaveModal}
 				onClose={() => setShowLeaveModal(false)}
@@ -1391,7 +1406,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				onSuccess={handleLeaveSuccess}
 			/>
 
-			{/* Delete Group Confirmation Modal */}
 			<DeleteGroupConfirmationModal
 				isOpen={showDeleteConfirmation}
 				onClose={() => setShowDeleteConfirmation(false)}
@@ -1401,7 +1415,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				onSuccess={handleDeleteSuccess}
 			/>
 
-			{/* Remove Member Confirmation Modal */}
 			<RemoveMemberConfirmationModal
 				isOpen={showRemoveMemberModal}
 				onClose={() => {
@@ -1418,7 +1431,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				}}
 			/>
 
-			{/* Group Delete Restriction Modal */}
 			<GroupDeleteRestrictionModal
 				isOpen={showDeleteRestrictionModal}
 				onClose={() => setShowDeleteRestrictionModal(false)}
@@ -1426,7 +1438,6 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 				memberCount={groupMembers.filter(member => member.user_id !== user?.id).length}
 			/>
 
-			{/* Leave Group Restriction Modal */}
 			<LeaveGroupRestrictionModal
 				isOpen={showLeaveRestrictionModal}
 				onClose={() => setShowLeaveRestrictionModal(false)}
