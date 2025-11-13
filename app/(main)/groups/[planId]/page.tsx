@@ -161,8 +161,11 @@ const GroupsPage = () => {
 				expiring_at: group.expiring_at
 			};
 
-			// Navigate to checkout with group details as state
-			router.push(`/checkout/${group.room_id}`);
+			// Navigate to checkout with group details as query params
+			const params = new URLSearchParams({
+				groupData: JSON.stringify(groupInfo)
+			});
+			router.push(`/checkout/${group.room_id}?${params.toString()}`);
 		}
 	};
 

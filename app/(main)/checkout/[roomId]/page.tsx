@@ -71,8 +71,26 @@ const CheckoutPage = () => {
 			fetchWalletBalance();
 			fetchCoupons();
 
-			if (roomId) {
-				fetchGroupDetails();
+			// Try to get group details from URL params first
+			if (typeof window !== 'undefined') {
+				const searchParams = new URLSearchParams(window.location.search);
+				const groupDataParam = searchParams.get('groupData');
+				
+				if (groupDataParam) {
+					try {
+						const parsedGroupData = JSON.parse(groupDataParam);
+						setGroupDetails(parsedGroupData);
+					} catch (e) {
+						console.error('Error parsing group data from URL:', e);
+						// If parsing fails, fetch from API
+						if (roomId) {
+							fetchGroupDetails();
+						}
+					}
+				} else if (roomId) {
+					// If no group data in URL, fetch from API
+					fetchGroupDetails();
+				}
 			}
 		}
 	}, [user?.id, user?.auth_token, roomId]);

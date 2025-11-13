@@ -951,8 +951,9 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 											onBack={() => setActiveView('main')}
 											onSave={() => setActiveView('main')}
 										/>
-									)}
-
+											)}
+											
+									{/* TODO: Fix pre-rendering issue with mailbox and uncomment  it. */}
 									{activeView === 'mailbox' && (
 										<div className="space-y-4">Mailbox View</div>
 										// <ChatMailBox
