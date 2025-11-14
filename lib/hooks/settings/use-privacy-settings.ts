@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchPrivacySettings, PrivacySettings } from '../../api/settings';
+import { fetchPrivacySettings, PrivacySettings } from '@/lib/api/settings';
 
 export const PRIVACY_SETTINGS_BASE_KEY = 'privacy_settings';
 

@@ -1,8 +1,11 @@
+'use client';
+
+
 import { useState } from 'react';
 import { LockKeyhole, ChevronUp, ChevronDown } from 'lucide-react';
-import { useAuthStore } from '../../store/authStore';
-import { usePrivacySettings } from '../../hooks/settings/usePrivacySettings';
-import { useUpdatePrivacySettings } from '../../hooks/settings/useUpdatePrivacySettings';
+import { useAuthStore } from '@/lib/store/auth-store';
+import { usePrivacySettings } from '@/lib/hooks/settings/use-privacy-settings';
+import { useUpdatePrivacySettings } from '@/lib/hooks/settings/use-update-privacy-settings';
 import Skeleton from 'react-loading-skeleton';
 
 const PrivacySettingsComponent = () => {
@@ -82,7 +85,7 @@ const PrivacySettingsComponent = () => {
 							) : (
 								<button
 									onClick={handlePhoneNumberToggle}
-									className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
+									className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
 										hidePhoneNumber ? 'bg-indigo-600' : 'bg-gray-600'
 									}`}
 								>
@@ -106,7 +109,7 @@ const PrivacySettingsComponent = () => {
 							) : (
 								<button
 									onClick={handleEmailToggle}
-									className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
+									className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
 										hideEmailId ? 'bg-indigo-600' : 'bg-gray-600'
 									}`}
 								>

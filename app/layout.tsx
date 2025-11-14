@@ -36,8 +36,8 @@ export default function RootLayout({
 				<Providers>
 					<GraphQLErrorHandler />
 					{children}
+					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 				</Providers>
-				<ReactQueryDevtools initialIsOpen={false} position="bottom" />
 			</body>
 		</html>
 	);

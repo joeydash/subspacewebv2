@@ -118,11 +118,11 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 
 			<div className="max-w-[1800px] mx-auto flex flex-col md:flex-row gap-0">
 				{/* Sidebar */}
-				<div className="order-2 md:order-1 md:w-[280px] flex-shrink-0">
+				<div className="order-2 md:order-1 md:w-[280px] shrink-0">
 					<div className={`md:static md:transform-none md:transition-none fixed top-0 left-0 h-full w-full z-50 transition-transform duration-300 ease-in-out rounded-lg md:rounded-none flex flex-col ${isSidebarOpen ? 'bg-dark-400 transform translate-x-0' : 'transform -translate-x-full'
 						} md:translate-x-0`}>
 						{/* Mobile Close Button */}
-						<div className="md:hidden flex items-center justify-between p-6 pb-4 flex-shrink-0">
+						<div className="md:hidden flex items-center justify-between p-6 pb-4 shrink-0">
 							<h2 className="text-xl font-bold">{t('nav.profile')}</h2>
 							<button
 								onClick={closeSidebar}
@@ -132,7 +132,7 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 							</button>
 						</div>
 
-						<div className="flex items-center px-6 pb-6 flex-shrink-0">
+						<div className="flex items-center px-6 pb-6 shrink-0">
 							<div className="bg-indigo-900 rounded-full overflow-hidden mr-4 w-12 h-12 flex items-center justify-center relative" suppressHydrationWarning>
 								{profileData.dp ? (
 									<Image
@@ -266,10 +266,10 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
 					</div>
 				</div>
 
-				{/* Main Content */}
+				{/* MainContent */}
 				<div className="order-1 md:order-3 flex-1 min-w-0 md:pl-8">
 					<div className="rounded-lg overflow-hidden md:mt-0">
-						<div className="max-sm:max-h-[800px] sm:h-[800px] overflow-y-auto small-scrollbar max-sm:p-2 sm:px-2">
+						<div className="max-sm:max-h-[800px] sm:h-[800px] overflow-y-auto hide-scrollbar max-sm:p-2 sm:px-2">
 							{children}
 						</div>
 					</div>

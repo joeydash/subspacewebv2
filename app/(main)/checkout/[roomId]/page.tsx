@@ -444,7 +444,7 @@ const CheckoutPage = () => {
 		<div className="page-container pt-24 pb-8">
 			{/* Header */}
 			<div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-8">
-				<button onClick={() => router.back()} className="text-gray-400 hover:text-white transition-colors p-1.5 md:p-2 hover:bg-dark-400 rounded-lg flex-shrink-0">
+				<button onClick={() => router.back()} className="text-gray-400 hover:text-white transition-colors p-1.5 md:p-2 hover:bg-dark-400 rounded-lg shrink-0">
 					<ArrowLeft className="h-5 w-5 md:h-6 md:w-6" />
 				</button>
 				<div className="flex-1 min-w-0">
@@ -455,13 +455,13 @@ const CheckoutPage = () => {
 
 			<div className="max-w-3xl mx-auto">
 				{/* Unified Checkout Card */}
-				<div className="bg-gradient-to-br from-dark-500 to-dark-600 rounded-2xl overflow-hidden border border-gray-700/50 shadow-2xl">
+				<div className="bg-linear-to-br from-dark-500 to-dark-600 rounded-2xl overflow-hidden border border-gray-700/50 shadow-2xl">
 
 					{/* Group Details Section */}
 					<div className="p-4 md:p-8 border-b border-gray-700/50">
 						{/* Top row with image, title, and price */}
 						<div className="flex items-start gap-3 mb-4">
-							<div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden bg-white p-2 flex-shrink-0 shadow-lg">
+							<div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden bg-white p-2 shrink-0 shadow-lg">
 								{groupDetails.room_dp ? (
 									<Image
 										src={groupDetails.room_dp}
@@ -486,11 +486,11 @@ const CheckoutPage = () => {
 						{/* Admin and members info */}
 						<div className="space-y-0.5 mb-1">
 							<div className="flex items-center gap-2 text-xs md:text-sm text-gray-400 rounded-lg p-3">
-								<Users className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+								<Users className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
 								<span className="flex-1">{t('checkout.groupAdmin')} <span className="text-white">{groupDetails.admin_name}</span></span>
 							</div>
 							<div className="flex items-center gap-2 text-xs md:text-sm rounded-lg p-3">
-								<Users className="h-3.5 w-3.5 md:h-4 md:w-4 flex-shrink-0" />
+								<Users className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
 								<span className={`flex-1 ${groupDetails.number_of_users >= groupDetails.share_limit ? 'text-red-400' : 'text-gray-400'}`}>
 									{groupDetails.number_of_users}/{groupDetails.share_limit} {t('group.members')}
 									{groupDetails.number_of_users >= groupDetails.share_limit && (
@@ -502,7 +502,7 @@ const CheckoutPage = () => {
 
 						{/* Next payment */}
 						<div className="flex items-center gap-2 text-xs md:text-sm text-gray-400 rounded-lg p-3">
-							<Clock className="h-4 w-4 flex-shrink-0" />
+							<Clock className="h-4 w-4 shrink-0" />
 							<span>{t('checkout.nextPayment')} {formatDate(groupDetails.expiring_at)}</span>
 						</div>
 
@@ -516,7 +516,7 @@ const CheckoutPage = () => {
 								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 									{groupMembers.map((member) => (
 										<div key={member.user_id} className="flex items-center gap-3 bg-dark-400/30 rounded-lg p-3">
-											<div className="relative flex-shrink-0">
+											<div className="relative shrink-0">
 												<div className="w-10 h-10 rounded-full overflow-hidden bg-dark-400 ring-2 ring-gray-700">
 													{member.dp ? (
 														<Image
@@ -686,7 +686,7 @@ const CheckoutPage = () => {
 						{error && (
 							<div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
 								<div className="flex items-center gap-2 text-red-400 text-sm md:text-base">
-									<AlertCircle className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+									<AlertCircle className="h-4 w-4 md:h-5 md:w-5 shrink-0" />
 									<span>{error}</span>
 								</div>
 							</div>
@@ -695,7 +695,7 @@ const CheckoutPage = () => {
 						{groupDetails.number_of_users >= groupDetails.share_limit && (
 							<div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
 								<div className="flex items-center gap-2 text-red-400 text-sm md:text-base">
-									<AlertCircle className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
+									<AlertCircle className="h-4 w-4 md:h-5 md:w-5 shrink-0" />
 									<span>{t('group.groupFullCannotJoin')}</span>
 								</div>
 							</div>
@@ -705,7 +705,7 @@ const CheckoutPage = () => {
 						<button
 							onClick={handlePayment}
 							disabled={isProcessing || netPayable < 0 || groupDetails.number_of_users >= groupDetails.share_limit}
-							className="w-full py-3 md:py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none text-sm md:text-base"
+							className="w-full py-3 md:py-4 bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:shadow-none text-sm md:text-base"
 						>
 							{isProcessing ? (
 								<>

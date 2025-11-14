@@ -7,7 +7,7 @@ import { useAuthStore } from '@/lib/store/auth-store';
 import { useLanguageStore } from '@/lib/store/language-store';
 import QRPaymentModal from '@/components/qr-payment-modal';
 import { toast } from 'react-hot-toast';
-import ConfirmationModal from './confirmation-modal';
+import ConfirmationModal from '@/components/confirmation-modal';
 import ProtectedRoute from '@/components/protected-route';
 
 interface Plan {
@@ -257,7 +257,7 @@ const RechargePlansPage = () => {
 	}
 
 	return (
-		<div className="pt-20 md:pt-4 pb-24 min-h-screen bg-gradient-to-br from-dark-600 via-dark-700 to-dark-800 text-white">
+		<div className="pt-20 md:pt-4 pb-24 min-h-screen bg-linear-to-br from-dark-600 via-dark-700 to-dark-800 text-white">
 			{/* Header */}
 			<div className="bg-dark-700 border-b border-gray-700 p-5 py-3 shadow-md">
 				<div className="flex items-center gap-4 ">
@@ -282,7 +282,7 @@ const RechargePlansPage = () => {
 							<button
 								key={type}
 								onClick={() => setActiveTab(type)}
-								className={`flex-shrink-0 px-8 py-3.5 text-base font-medium border-b-2 transition-colors ${activeTab === type
+								className={`shrink-0 px-8 py-3.5 text-base font-medium border-b-2 transition-colors ${activeTab === type
 									? 'border-indigo-500 text-white shadow-md'
 									: 'border-transparent text-gray-400 hover:text-white'
 									}`}
@@ -376,12 +376,12 @@ const RechargePlansPage = () => {
 											<div className="flex-1 min-w-0">
 												{/* badges row: allow wrapping but keep each badge from shrinking */}
 												<div className="flex items-center gap-2 mb-2 flex-wrap">
-													<div className="text-sm sm:text-base bg-blue-500/25 text-blue-300 px-3 py-1 rounded-full flex-shrink-0">
+													<div className="text-sm sm:text-base bg-blue-500/25 text-blue-300 px-3 py-1 rounded-full shrink-0">
 														{t('mobile.validity')} {formatValidity(plan.validity)}
 													</div>
 
 													{plan.type && (
-														<div className="text-xs sm:text-sm bg-gray-500/25 text-gray-300 px-2 py-1 rounded-full flex-shrink-0">
+														<div className="text-xs sm:text-sm bg-gray-500/25 text-gray-300 px-2 py-1 rounded-full shrink-0">
 															{formatTabName(plan.type)}
 														</div>
 													)}

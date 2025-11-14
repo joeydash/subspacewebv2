@@ -1,8 +1,12 @@
+'use client';
+
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Share2, ChevronUp, ChevronDown } from 'lucide-react';
-import { useAuthStore } from '../../store/authStore';
-import { useSharedSubscriptions } from '../../hooks/settings/useSharedSubscriptions';
-import { useUpdateSubscriptionPublicStatus } from '../../hooks/settings/useUpdateSubscriptionPublicStatus';
+import { useAuthStore } from '@/lib/store/auth-store';
+import { useSharedSubscriptions } from '@/lib/hooks/settings/use-shared-subscriptions';
+import { useSharedSubscriptionMutation } from '@/lib/hooks/settings/use-shared-subscription-mutation';
+import SharedSubscriptionsSkeleton from './shared-subscriptions-skeleton';
 
 const SharedSubscriptionsComponent: React.FC = () => {
 	const { user } = useAuthStore();
@@ -17,9 +21,7 @@ const SharedSubscriptionsComponent: React.FC = () => {
 		userId: user?.id
 	});
 
-
-
-	const updateSubscriptionMutation = useUpdateSubscriptionPublicStatus({
+	const updateSubscriptionMutation = useSharedSubscriptionMutation({
 		userId: user?.id || '',
 		authToken: user?.auth_token || ''
 	});
@@ -49,10 +51,7 @@ const SharedSubscriptionsComponent: React.FC = () => {
 			</button>
 			{isExpanded && (
 				isLoadingSubscriptions ? (
-					<div className="text-center py-6 sm:py-8 px-2">
-						<div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto"></div>
-						<p className="text-gray-400 mt-2 text-xs sm:text-sm">Loading subscriptions...</p>
-					</div>
+					<SharedSubscriptionsSkeleton count={4} />
 				) : subscriptionsError ? (
 					<div className="text-center py-6 sm:py-8 px-2">
 						<div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 sm:p-4">
@@ -72,11 +71,12 @@ const SharedSubscriptionsComponent: React.FC = () => {
 						{subscriptions.map((subscription) => (
 							<div key={subscription.id} className="flex items-center justify-between gap-3">
 								<div className="flex items-center gap-3 flex-1 min-w-0">
-									<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden bg-white p-1 flex-shrink-0">
-										<img
+									<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden bg-white p-1 shrink-0 relative">
+										<Image
 											src={subscription.service_image_url}
 											alt={subscription.service_name}
-											className="w-full h-full object-contain"
+											fill
+											className="object-contain"
 										/>
 									</div>
 									<div className="flex-1 min-w-0">
@@ -88,7 +88,7 @@ const SharedSubscriptionsComponent: React.FC = () => {
 								</div>
 								<button
 									onClick={() => handleSubscriptionToggle(subscription.id, subscription.is_public)}
-									className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
+									className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-dark-600 ${
 										subscription.is_public ? 'bg-indigo-600' : 'bg-gray-600'
 									}`}
 								>

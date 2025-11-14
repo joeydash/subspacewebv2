@@ -646,9 +646,9 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 					onScroll={activeView == 'transactions' ? handleTransactionsScroll : undefined}
 				>
 					{/* Header */}
-					<div className="relative flex-shrink-0">
+					<div className="relative shrink-0">
 						{/* Background with group image */}
-						<div className="h-24 sm:h-32 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 relative overflow-hidden">
+						<div className="h-24 sm:h-32 bg-linear-to-br from-indigo-500/20 to-purple-500/20 relative overflow-hidden">
 							{groupImage && (
 								<Image
 									src={groupImage}
@@ -658,7 +658,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 									sizes="(max-width: 640px) 100vw, 512px"
 								/>
 							)}
-							<div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+							<div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent"></div>
 						</div>
 
 						{/* Header content */}
@@ -667,12 +667,12 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 								{activeView !== 'main' ? (
 									<button
 										onClick={handleBackToMain}
-										className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center text-white hover:bg-white/20 transition-colors rounded-lg backdrop-blur-sm"
+										className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center text-white hover:bg-white/20 transition-colors rounded-lg backdrop-blur-sm"
 									>
 										<ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
 									</button>
 								) : (
-									<div className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0" aria-hidden />
+									<div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0" aria-hidden />
 								)}
 								<div className="flex items-center gap-2 sm:gap-3 min-w-0">
 									<div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-white/90 p-2 shadow-lg relative">
@@ -1225,7 +1225,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 													onClick={() => setSelectedMemberForInfo(member)}
 												>
 													<div className="relative">
-														<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-gradient-to-br from-indigo-500 to-purple-500 p-0.5">
+														<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-linear-to-br from-indigo-500 to-purple-500 p-0.5">
 															<div className="w-full h-full rounded-full overflow-hidden bg-dark-600 relative">
 																{member.dp ? (
 																	<Image
@@ -1236,7 +1236,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 																		sizes="48px"
 																	/>
 																) : (
-																	<div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center">
+																	<div className="w-full h-full bg-linear-to-br from-indigo-500 to-purple-500 flex items-center justify-center">
 																		<span className="text-white text-base sm:text-lg font-bold">
 																			{member.fullname.charAt(0).toUpperCase()}
 																		</span>

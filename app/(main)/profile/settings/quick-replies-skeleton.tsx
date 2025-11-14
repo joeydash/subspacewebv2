@@ -8,25 +8,23 @@ interface QuickRepliesSkeletonProps {
 
 const QuickRepliesSkeleton: React.FC<QuickRepliesSkeletonProps> = ({ count = 3 }) => {
 	return (
-		<div className="space-y-3">
+		<div className="space-y-0">
 			{Array.from({ length: count }).map((_, index) => (
 				<div
 					key={index}
-					className="bg-dark-500 rounded-lg p-4 border border-gray-600"
+					className="flex items-start justify-between py-3 sm:py-4 px-2 sm:px-3 border-b border-dark-300 last:border-b-0"
 				>
-					<div className="flex items-start justify-between">
-						<div className="flex-1">
-							{/* Shortcut Badge */}
-							<div className="flex items-center gap-2 mb-2">
-								<Skeleton width={60} height={20} className="rounded" />
-							</div>
-
-							{/* Message */}
-							<div className="space-y-2">
-								<Skeleton width={`80%`} height={14} />
-								<Skeleton width={`60%`} height={14} />
-							</div>
+					<div className="flex-1 min-w-0 space-y-1.5 sm:space-y-2">
+						<div>
+							<Skeleton width={40} height={20} className="rounded" />
 						</div>
+						<div className="space-y-1">
+							<Skeleton width={`90%`} height={14} />
+							<Skeleton width={`70%`} height={14} />
+						</div>
+					</div>
+					<div className="ml-2 sm:ml-3 p-1.5 sm:p-2">
+						<Skeleton width={16} height={16} className="rounded" />
 					</div>
 				</div>
 			))}

@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { updatePrivacySettings } from '../../api/settings';
-import { PRIVACY_SETTINGS_BASE_KEY } from './usePrivacySettings';
+import { updatePrivacySettings } from '@/lib/api/settings';
+import { PRIVACY_SETTINGS_BASE_KEY } from './use-privacy-settings';
 import { toast } from 'react-hot-toast';
 
 interface UseUpdatePrivacySettingsParams {
