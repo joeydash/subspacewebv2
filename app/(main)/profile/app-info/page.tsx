@@ -167,7 +167,7 @@ const AppInfoComponent: React.FC = () => {
 			<div className="text-center py-8">
 				<div className="w-32 h-32 mx-auto mb-6 bg-dark-400 rounded-2xl overflow-hidden flex items-center justify-center">
 					<Image
-						src="/favicon.svg"
+						src="/favicon.ico"
 						alt="Subspace Logo"
 						width={96}
 						height={96}

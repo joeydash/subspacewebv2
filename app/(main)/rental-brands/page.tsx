@@ -19,7 +19,7 @@ const RentalBrandsPageContent = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
-	const selectedCategory = searchParams.get('category') || 'All';
+	const selectedCategory = searchParams.get('class') || 'All';
 
 	const { location: globalLocation } = useCurrentLocation();
 	const { data, isLoading } = useRentProductBrands({

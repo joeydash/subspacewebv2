@@ -124,7 +124,7 @@ const CarouselSection = ({ isAuthenticated, user }: CarouselSectionProps) => {
 									}
 								}}
 							>
-								<div className={`aspect-2/1 md:w-96 md:h-48 lg:w-[28rem] lg:h-56 rounded-2xl overflow-hidden shadow-2xl group ${!isCenter ? 'filter blur-sm' : ''
+								<div className={`relative aspect-video md:w-96 md:h-48 lg:w-wd lg:h-56 rounded-2xl overflow-hidden shadow-2xl group ${!isCenter ? 'filter blur-sm' : ''
 									}`}>
 									{carousel.image_url.endsWith('.webm') ? (
 										<video
@@ -140,13 +140,13 @@ const CarouselSection = ({ isAuthenticated, user }: CarouselSectionProps) => {
 									) : (
 										<Image
 											src={carousel.image_url}
-											alt=""
+											alt="carousel image"
 											fill
 											className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
 										/>
 									)}
-									<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
-									<div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30"></div>
+									<div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-black/20"></div>
+									<div className="absolute inset-0 bg-linear-to-r from-black/30 via-transparent to-black/30"></div>
 								</div>
 							</div>
 						);
@@ -177,7 +177,7 @@ const CarouselSection = ({ isAuthenticated, user }: CarouselSectionProps) => {
 			</div>
 
 			<div className="flex justify-center items-center space-x-2 md:space-x-3 mt-4 md:mt-6">
-				{carousels.map((_, index) => (
+				{carousels.map((_, index: number) => (
 					<button
 						key={index}
 						onClick={() => setCurrentSlide(index)}
@@ -193,20 +193,6 @@ const CarouselSection = ({ isAuthenticated, user }: CarouselSectionProps) => {
 };
 
 
-interface Category {
-	name: string;
-	poster: string;
-	service_count: number;
-	service_images: string[];
-}
-
-interface FavouriteBrand {
-	brand_id: string;
-	whatsub_service: {
-		image_url: string;
-		discount_text: string;
-	};
-}
 
 const ExplorePage = () => {
 	const [searchQuery, setSearchQuery] = useState('');
@@ -214,9 +200,18 @@ const ExplorePage = () => {
 	const { t } = useLanguageStore();
 	const router = useRouter();
 
-	const { data: favouriteBrands, isLoading: isLoadingFavouriteBrands } = useFavouriteBrands({ isAuthenticated, user });
-	const { data: brandCategories, isLoading: isLoadingBrandCategories } = useBrandCategories({ userId: user?.id, authToken: user?.authToken });
-	const { data: publicGroups, isLoading: isLoadingPublicGroups } = usePublicGroups({ userId: user?.id, authToken: user?.auth_token });
+	const {
+		data: favouriteBrands,
+		isLoading: isLoadingFavouriteBrands
+	} = useFavouriteBrands({ isAuthenticated, user });
+	const {
+		data: brandCategories,
+		isLoading: isLoadingBrandCategories
+	} = useBrandCategories({ userId: user?.id, authToken: user?.authToken });
+	const {
+		data: publicGroups,
+		isLoading: isLoadingPublicGroups
+	} = usePublicGroups({ userId: user?.id, authToken: user?.auth_token });
 
 
 	return (
@@ -341,8 +336,8 @@ const ExplorePage = () => {
 													backgroundPosition: 'center'
 												}}
 											>
-												<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-												<div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-transparent" />
+												<div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
+												<div className="absolute inset-0 bg-linear-to-b from-black/70 via-transparent to-transparent" />
 												<div className="absolute inset-0 p-6 pt-4 flex flex-col justify-between">
 													<div className="flex justify-end">
 														<div className="bg-white/20 text-white text-sm px-3 py-1 rounded-full font-medium">
@@ -398,7 +393,7 @@ const ExplorePage = () => {
 					) : (
 						<div className="relative">
 							<div className="overflow-x-auto pb-4 hide-scrollbar">
-								<div className="flex flex-col space-y-4 md:space-y-6 px-1" style={{ width: `${Math.ceil(publicGroups.length / 2) * (320 + 24)}px` }}>
+								<div className="flex flex-col space-y-4 md:space-y-6 px-1" style={{ width: `${Math.ceil((publicGroups?.length || 0) / 2) * (320 + 24)}px` }}>
 									{/* First Row */}
 									<div className="flex space-x-4 md:space-x-6">
 										{publicGroups?.filter((_, index) => index % 2 === 0).map((group) => (
@@ -408,7 +403,7 @@ const ExplorePage = () => {
 												className="w-72 md:w-80 bg-[#2A2D3A] rounded-xl p-4 md:p-6 hover:bg-[#323544] transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/10 group border border-gray-700/30"
 											>
 												<div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
-													<div className="w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden bg-transparent p-1.5 md:p-2 group-hover:bg-white/20 transition-colors flex-shrink-0 relative">
+													<div className="w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden bg-transparent p-1.5 md:p-2 group-hover:bg-white/20 transition-colors shrink-0 relative">
 														<Image
 															src={group.room_dp}
 															alt={group.name}
@@ -438,7 +433,7 @@ const ExplorePage = () => {
 														<div className="text-xs md:text-sm text-gray-400 truncate">
 															{t('explore.duration')}: {group.whatsub_plans.duration} {group.whatsub_plans.duration_type}
 														</div>
-														<div className="bg-gradient-to-r from-blue-500/40 to-purple-600/40 text-white text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full font-medium whitespace-nowrap">
+														<div className="bg-linear-to-r from-blue-500/40 to-purple-600/40 text-white text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full font-medium whitespace-nowrap">
 															{group.count}+ {t('explore.groups')}
 														</div>
 													</div>
@@ -456,7 +451,7 @@ const ExplorePage = () => {
 												className="w-72 md:w-80 bg-[#2A2D3A] rounded-xl p-4 md:p-6 hover:bg-[#323544] transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/10 group border border-gray-700/30"
 											>
 												<div className="flex items-start gap-3 md:gap-4 mb-3 md:mb-4">
-													<div className="w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden bg-transparent p-1.5 md:p-2 group-hover:bg-white/20 transition-colors flex-shrink-0 relative">
+													<div className="w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden bg-transparent p-1.5 md:p-2 group-hover:bg-white/20 transition-colors shrink-0 relative">
 														<Image
 															src={group.room_dp}
 															alt={group.name}
@@ -486,7 +481,7 @@ const ExplorePage = () => {
 														<div className="text-xs md:text-sm text-gray-400 truncate">
 															{t('explore.duration')}: {group.whatsub_plans.duration} {group.whatsub_plans.duration_type}
 														</div>
-														<div className="bg-gradient-to-r from-blue-500/40 to-purple-600/40 text-white text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full font-medium whitespace-nowrap">
+														<div className="bg-linear-to-r from-blue-500/40 to-purple-600/40 text-white text-xs md:text-sm px-2 md:px-3 py-0.5 md:py-1 rounded-full font-medium whitespace-nowrap">
 															{group.count}+ {t('explore.groups')}
 														</div>
 													</div>

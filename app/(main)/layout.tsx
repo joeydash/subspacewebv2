@@ -7,6 +7,7 @@ import Footer from "./footer";
 
 import { connectWebSocket, disconnectWebSocket } from 'vocallabs_agent_web';
 import { useAuthStore } from "@/lib/store/auth-store";
+import updateUserLastActive from "@/lib/api/auth";
 
 
 export default function MainLayout({
@@ -20,8 +21,18 @@ export default function MainLayout({
 		if (!isAuthenticated) return;
 
 		connectWebSocket(user?.id, 'go-fiber-ayft.onrender.com');
-		return () => disconnectWebSocket();
-	}, [isAuthenticated, user?.id]);
+		const intervalId = setInterval(() => {
+			updateUserLastActive({
+				userId: user?.id || '',
+				authToken: user?.auth_token || ''
+			})
+		}, 1000 * 60 * 1.5); // Update every 90 seconds
+
+		return () => {
+			clearInterval(intervalId);
+			disconnectWebSocket()
+		};
+	}, [isAuthenticated, user?.id, user?.auth_token]);
 
 
 	return (

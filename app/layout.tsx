@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 	title: "Subspace | Subscription Management Platform",
 	description: "Manage subscriptions, share costs, and discover new services",
 	icons: {
-		icon: "/favicon.svg",
+		icon: "/favicon.ico",
 	},
 	manifest: "/manifest.json",
 };
