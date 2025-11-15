@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Copy, CheckCircle, Video, Shield, Users, MessageSquare } from 'lucide-react';
-import { Player } from '@lottiefiles/react-lottie-player';
 import { useAuthStore } from '@/lib/store/auth-store';
 
 interface HelpWidgetData {
@@ -157,12 +157,7 @@ const ChatMailBox: React.FC<ChatMailBoxProps> = ({ onBack, roomDetails }) => {
 			{/* Mail Animation */}
 			<div className="flex justify-center">
 				<div className="w-32 h-32 rounded-2xl overflow-hidden bg-dark-400">
-					<Player
-						autoplay
-						loop
-						src="/mail-animation.json"
-						style={{ height: '128px', width: '128px' }}
-					/>
+					<Image src='/mail-animation.gif' alt="Mail Animation" width={128} height={128} />
 				</div>
 			</div>
 
@@ -212,7 +207,7 @@ const ChatMailBox: React.FC<ChatMailBoxProps> = ({ onBack, roomDetails }) => {
 						className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center hover:bg-purple-500/30 transition-colors shrink-0"
 					>
 						{helpWidgetData?.anim_url ? (
-							<Player autoplay loop src={helpWidgetData.anim_url} style={{ height: '32px', width: '32px' }} />
+							<Image src='/video-animation.gif' alt="Help Widget Animation" width={40} height={40} />
 						) : (
 							<Video className="h-6 w-6 text-purple-400" />
 						)}

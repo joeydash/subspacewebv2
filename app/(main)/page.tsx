@@ -216,13 +216,12 @@ const ExplorePage = () => {
 
 	return (
 		<>
-			<div className='pt-[55px] md:pt-1'>
+			<div className='pt-[60px] md:pt-1'>
 				<InfiniteScroller />
 			</div>
 			<div className="page-container pt-4 lg:pt-20">
 				<CarouselSection isAuthenticated={isAuthenticated} user={user} />
 
-				{/* Favorite Brands */}
 				<section className="mb-8 md:mb-12">
 					<div className="flex items-center justify-between mb-4 md:mb-6">
 						<h2 className="text-xl md:text-2xl font-bold">{t('explore.favouriteBrands')}</h2>

@@ -82,8 +82,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 					disabled={isChangingLanguage}
 				>
 					{showLabel && <span className="text-gray-300 hidden lg:inline">{t('nav.language')}</span>}
-					{/* Display shortName for currently selected language */}
-					<span className="text-white font-medium text-sm md:text-xs lg:text-sm">{currentLanguage?.shortName}</span>
+				{/* Display shortName for currently selected language */}
+				<span className="text-white font-medium text-xs md:text-sm">{currentLanguage?.shortName}</span>
 					<ChevronDown className={`h-3 w-3 md:h-4 md:w-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
 					{isChangingLanguage && (
 						<div className="animate-spin rounded-full h-3 w-3 md:h-4 md:w-4 border-t-2 border-b-2 border-indigo-500"></div>
@@ -246,12 +246,12 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 		<div className={`relative ${className}`} ref={dropdownRef}>
 			<button
 				onClick={() => setIsOpen(!isOpen)}
-				className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-dark-400 transition-colors"
+				className="flex items-center gap-2 px-0.5 md:px-3 py-2 rounded-lg hover:bg-dark-400 transition-colors"
 				disabled={isChangingLanguage}
 			>
 				{showLabel && <span className="text-gray-300">{t('nav.language')}</span>}
 				{/* Display shortName for currently selected language */}
-				<span className="text-white font-medium">{currentLanguage?.shortName}</span>
+				<span className="text-white font-medium max-md:text-sm">{currentLanguage?.shortName}</span>
 				<ChevronDown className={`h-4 w-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
 				{isChangingLanguage && (
 					<div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-indigo-500"></div>

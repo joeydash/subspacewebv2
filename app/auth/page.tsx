@@ -23,7 +23,7 @@ const AuthPageContent = () => {
 	const [otp, setOtp] = useState(['', '', '', '', '', '']);
 	const [error, setError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const { phoneNumber, requestId, setPhoneNumber, setRequestId, isAuthenticated } = useAuthStore();
+	const { phoneNumber, isAuthenticated } = useAuthStore();
 	const { isOnline } = useNetworkStatus();
 
 	// Get redirect path from URL params
@@ -58,8 +58,8 @@ const AuthPageContent = () => {
 			if (success) {
 				setStep(AuthStep.OTP_INPUT);
 			}
-		} catch (err) {
-			setError(t('error.serverError'));
+		} catch (e: unknown) {
+			setError((e as Error).message || t('error.serverError'));
 		} finally {
 			setIsLoading(false);
 		}
@@ -122,8 +122,8 @@ const AuthPageContent = () => {
 			} else {
 				setError(t('auth.otp.invalid'));
 			}
-		} catch (err) {
-			setError(t('auth.otp.invalid'));
+		} catch (e: unknown) {
+			setError((e as Error).message || t('auth.otp.invalid'));
 		} finally {
 			setOtp(['', '', '', '', '', '']);
 			const first = document.getElementById(`otp-0`);

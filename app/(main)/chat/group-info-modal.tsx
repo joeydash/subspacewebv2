@@ -10,7 +10,7 @@ import FriendInfoModal from '@/components/friend-info-modal';
 import LeaveGroupModal from './leave-group-modal';
 import EditGroupDetails from './edit-group-details';
 import WelcomeMessage from './welcome-message';
-// import ChatMailBox from './chat-mail-box';
+import ChatMailBox from './chat-mail-box';
 import UploadTermsComponent from './upload-terms-component';
 import GroupInfoView from './group-info-view';
 import DeleteGroupConfirmationModal from './delete-group-confirmation-modal';
@@ -792,7 +792,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 															<ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
 														</button>
 
-														{/* <button
+														<button
 															onClick={() => setActiveView('mailbox')}
 															className="w-full flex items-center justify-between p-3 sm:p-3.5 bg-dark-400 hover:bg-dark-300 rounded-lg transition-colors group"
 														>
@@ -801,7 +801,7 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 																<span className="text-sm sm:text-base font-medium">Mail Box</span>
 															</div>
 															<ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-white transition-colors" />
-														</button> */}
+														</button>
 														<button
 															onClick={() => setActiveView('make-public')}
 															className="w-full flex items-center justify-between p-3 sm:p-3.5 bg-dark-400 hover:bg-dark-300 rounded-lg transition-colors group"
@@ -955,11 +955,10 @@ const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
 											
 									{/* TODO: Fix pre-rendering issue with mailbox and uncomment  it. */}
 									{activeView === 'mailbox' && (
-										<div className="space-y-4">Mailbox View</div>
-										// <ChatMailBox
-										// 	onBack={() => setActiveView('main')}
-										// 	roomDetails={roomDetails}
-										// />
+										<ChatMailBox
+											onBack={() => setActiveView('main')}
+											roomDetails={roomDetails}
+										/>
 									)}
 
 									{/* Make Public View */}

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import { motion, useAnimate } from "framer-motion";
+
 import {
 	fadeOut,
 	icon,

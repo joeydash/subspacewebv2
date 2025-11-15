@@ -8,6 +8,7 @@ import Footer from "./footer";
 import { connectWebSocket, disconnectWebSocket } from 'vocallabs_agent_web';
 import { useAuthStore } from "@/lib/store/auth-store";
 import updateUserLastActive from "@/lib/api/auth";
+import MobileBottomNav from "../mobile-navbar";
 
 
 export default function MainLayout({
@@ -38,7 +39,7 @@ export default function MainLayout({
 	return (
 		<div className="flex flex-col min-h-screen">
 			<Navbar />
-			<main className="grow mt-16">
+			<main className="grow mt-12">
 				{children}
 			</main>
 			<Footer />

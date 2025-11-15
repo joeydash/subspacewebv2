@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { X, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuthStore } from '@/lib/store/auth-store';
-import { useLanguageStore } from '@/lib/store/language-store';
 
 interface LeaveGroupModalProps {
   isOpen: boolean;
@@ -17,11 +16,9 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
   isOpen,
   onClose,
   groupId,
-  groupName,
   onSuccess
 }) => {
   const { user } = useAuthStore();
-  const { t } = useLanguageStore();
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'submitting' | 'success' | 'failed'>('idle');
@@ -122,11 +119,11 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[80] p-4">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-80 p-4">
       <div className="bg-dark-500 rounded-2xl w-full max-w-md border border-gray-700 shadow-2xl">
         {/* Header with colored bar */}
         <div className="relative">
-          <div className="h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-t-2xl"></div>
+          <div className="h-2 bg-linear-to-r from-indigo-500 to-purple-500 rounded-t-2xl"></div>
           <div className="p-6 border-b border-gray-700">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-bold text-white">Reason for leaving the group?</h3>
@@ -174,7 +171,7 @@ const LeaveGroupModal: React.FC<LeaveGroupModalProps> = ({
               {/* Note */}
               <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/20 rounded-lg">
                 <div className="flex items-start gap-3">
-                  <AlertCircle className="h-5 w-5 text-orange-400 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="h-5 w-5 text-orange-400 shrink-0 mt-0.5" />
                   <p className="text-gray-300 text-sm leading-relaxed">
                     Please take note that your request will only be considered if you are having trouble accessing the subscription.
                   </p>

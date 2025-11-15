@@ -638,7 +638,7 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({
 		<>
 			{/* Navbar Display */}
 			<div
-				className="flex items-center gap-2 cursor-pointer hover:bg-dark-400 rounded-lg p-2 transition-colors md:max-w-xs"
+				className="flex items-center gap-2 cursor-pointer hover:bg-dark-400 rounded-lg py-1 px-0.5 md:p-2 transition-colors md:max-w-xs"
 				onClick={handleNavbarClick}
 			>
 				<div className="text-left flex-1 min-w-0">

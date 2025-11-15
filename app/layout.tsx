@@ -5,7 +5,8 @@ import "./preloader.css";
 import { Providers } from "./providers";
 import GraphQLErrorHandler from "@/components/graphql-error-handler";
 import Loader from "@/components/loader";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import MobileBottomNav from "./mobile-navbar";
 
 const inter = Inter({
 	variable: "--font-inter",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 	title: "Subspace | Subscription Management Platform",
 	description: "Manage subscriptions, share costs, and discover new services",
 	icons: {
-		icon: "/favicon.ico",
+		icon: "/favicon.svg",
 	},
 	manifest: "/manifest.json",
 };
@@ -36,7 +37,9 @@ export default function RootLayout({
 				<Providers>
 					<GraphQLErrorHandler />
 					{children}
-					<ReactQueryDevtools initialIsOpen={false} position="bottom" />
+					<MobileBottomNav />
+
+					{/* <ReactQueryDevtools initialIsOpen={false} position="top" /> */}
 				</Providers>
 			</body>
 		</html>

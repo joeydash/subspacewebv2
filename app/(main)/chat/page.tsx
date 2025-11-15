@@ -15,8 +15,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { UNREAD_CHATS_COUNT_BASE_KEY } from '@/lib/hooks/chat/use-unread-chats-count';
 import ProtectedRoute from '@/components/protected-route';
 
-// Disable pre-rendering for this dynamic page
-export const dynamic = 'force-dynamic';
 
 // Your existing query constants
 const GET_ROOM_DETAILS = `
@@ -1155,7 +1153,7 @@ const ChatPage = () => {
 
 				{/* Admin Group Info Modal */}
 				{showAdminGroupInfoModal && currentUserMapping && (
-					<div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[70] p-4">
+					<div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-70 p-4">
 						<div className="bg-dark-500 rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-700 shadow-2xl">
 							{/* Header */}
 							<div className="p-6 border-b border-gray-700">

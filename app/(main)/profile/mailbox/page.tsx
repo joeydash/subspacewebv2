@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Mail, Shield, Users, MessageSquare, Copy, CheckCircle, RefreshCw } from 'lucide-react';
-import { Player } from '@lottiefiles/react-lottie-player';
 import { useAuthStore } from '@/lib/store/auth-store';
 import MailboxSkeleton from './mailbox-skeleton';
 import { useMailbox } from '@/lib/hooks/mailbox/use-mailbox';
@@ -12,6 +12,7 @@ const MailboxComponent: React.FC = () => {
 	const [copied, setCopied] = useState(false);
 
 	const { data: helpWidgetData, isLoading, error, refetch } = useMailbox(user?.auth_token, 'mailbox');
+
 
 	const subspaceMail = (user?.phone || '') + (user?.mailPrefix || '');
 
@@ -88,12 +89,7 @@ const MailboxComponent: React.FC = () => {
 			{/* Mail Animation */}
 			<div className="flex justify-center">
 				<div className="w-24 h-24 rounded-xl overflow-hidden bg-dark-400/50">
-					<Player
-						autoplay
-						loop
-						src="/mail-animation.json"
-						style={{ height: '96px', width: '96px' }}
-					/>
+					<Image src='/mail-animation.gif' alt="Mail Animation" width={96} height={96} />
 				</div>
 			</div>
 
@@ -142,12 +138,7 @@ const MailboxComponent: React.FC = () => {
 						onClick={handleTutorialClick}
 						className="w-12 h-12 flex items-center justify-center bg-purple-500/20 rounded-full hover:bg-purple-500/30 transition-colors shrink-0"
 					>
-						<Player
-							autoplay
-							loop
-							src={helpWidgetData?.anim_url}
-							style={{ height: '40px', width: '40px' }}
-						/>
+						<Image src='/video-animation.gif' alt="Help Widget Animation" width={40} height={40} />
 					</button>
 				</div>
 			</div>

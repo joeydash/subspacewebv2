@@ -26,7 +26,7 @@ const MailboxSkeleton: React.FC = () => {
 			<div className="space-y-2.5">
 				{[1, 2, 3].map((index) => (
 					<div key={index} className="flex items-center gap-3 p-3 bg-dark-400/50 rounded-lg">
-						<Skeleton circle width={28} height={28} className="flex-shrink-0" />
+						<Skeleton circle width={28} height={28} className="shrink-0" />
 						<div className="flex-1">
 							<Skeleton width="100%" height={16} />
 						</div>
@@ -35,13 +35,13 @@ const MailboxSkeleton: React.FC = () => {
 			</div>
 
 			{/* Tutorial Section */}
-			<div className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-lg p-4">
+			<div className="bg-linear-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 rounded-lg p-4">
 				<div className="flex items-center justify-between gap-3">
 					<div className="flex-1">
 						<Skeleton width="75%" height={20} className="mb-1" />
 						<Skeleton width="55%" height={14} />
 					</div>
-					<Skeleton circle width={48} height={48} className="flex-shrink-0" />
+					<Skeleton circle width={48} height={48} className="shrink-0" />
 				</div>
 			</div>
 
@@ -51,7 +51,7 @@ const MailboxSkeleton: React.FC = () => {
 					<div className="flex-1">
 						<Skeleton width="100%" height={20} />
 					</div>
-					<Skeleton width={40} height={40} borderRadius={8} className="flex-shrink-0" />
+					<Skeleton width={40} height={40} borderRadius={8} className="shrink-0" />
 				</div>
 			</div>
 		</div>

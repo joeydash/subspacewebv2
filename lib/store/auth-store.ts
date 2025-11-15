@@ -476,12 +476,18 @@ export const initiatePhoneAuth = async (phone: string) => {
 	}
 };
 
-// Function to verify OTP
 export const verifyOTP = async (phone: string, otp: string) => {
-	// Check if user is online
+	const errorReturnValue = {
+		success: false,
+		id: null,
+		auth_token: null,
+		fullname: null
+	};
+
+
 	if (typeof window !== 'undefined' && !navigator.onLine) {
 		authStoreInstance.setError('No internet connection. Please check your network and try again.');
-		return false;
+		return errorReturnValue;
 	}
 
 	authStoreInstance.setLoading(true);
@@ -523,13 +529,11 @@ export const verifyOTP = async (phone: string, otp: string) => {
 
 		if (data.errors) {
 			authStoreInstance.setError(data.errors[0]?.message || 'Verification failed');
-			return false;
+			return errorReturnValue;
 		}
 
 		if (data.data?.verify_otp?.type === 'success') {
 			const { id, auth_token } = data.data.verify_otp;
-			console.log(data.data.verify_otp);
-			// Fetch user profile data after successful authentication
 			const profileData = await fetchUserProfile(auth_token);
 
 			authStoreInstance.login({
@@ -553,19 +557,14 @@ export const verifyOTP = async (phone: string, otp: string) => {
 			});
 
 
-			return {
-				success: true,
-				id,
-				auth_token,
-				fullname: profileData?.fullname
-			};
+			return errorReturnValue;
 		} else {
 			authStoreInstance.setError('Verification failed');
-			return false;
+			return errorReturnValue;
 		}
-	} catch {
-		authStoreInstance.setError('Network error. Please try again.');
-		return false;
+	} catch (e: unknown) {
+		authStoreInstance.setError((e as Error).message || 'Network error. Please try again.');
+		return errorReturnValue;
 	} finally {
 		authStoreInstance.setLoading(false);
 	}
